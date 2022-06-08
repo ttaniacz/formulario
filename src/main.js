@@ -14,6 +14,7 @@ import Card from 'primevue/card';
 import Panel from 'primevue/panel'
 import InputText from 'primevue/inputtext';
 import InputMask from 'primevue/inputmask';
+import Checkbox from 'primevue/checkbox';
 
 
 
@@ -27,5 +28,6 @@ app.component('Card', Card);
 app.component('Panel', Panel);
 app.component('InputText' , InputText);
 app.component('InputMask', InputMask);
+app.component('Checkbox', Checkbox);
 
 app.mount('#app')
