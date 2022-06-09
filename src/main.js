@@ -15,6 +15,11 @@ import Panel from 'primevue/panel'
 import InputText from 'primevue/inputtext';
 import InputMask from 'primevue/inputmask';
 import Checkbox from 'primevue/checkbox';
+import Dropdown from 'primevue/dropdown';
+import InputNumber from 'primevue/inputnumber';
+import Calendar from 'primevue/calendar';
+
+
 
 
 
@@ -29,5 +34,8 @@ app.component('Panel', Panel);
 app.component('InputText' , InputText);
 app.component('InputMask', InputMask);
 app.component('Checkbox', Checkbox);
+app.component('Dropdown', Dropdown);
+app.component('InputNumber', InputNumber);
+app.component('Calendar', Calendar);
 
 app.mount('#app')
