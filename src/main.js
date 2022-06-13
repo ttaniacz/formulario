@@ -18,6 +18,9 @@ import Checkbox from 'primevue/checkbox';
 import Dropdown from 'primevue/dropdown';
 import InputNumber from 'primevue/inputnumber';
 import Calendar from 'primevue/calendar';
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
+
 
 
 
@@ -26,6 +29,7 @@ import Calendar from 'primevue/calendar';
 const app = createApp(App);
 
 app.use(PrimeVue);
+app.use(ToastService);
 
 app.component('Dialog', Dialog);
 app.component('Button', Button);
@@ -37,5 +41,6 @@ app.component('Checkbox', Checkbox);
 app.component('Dropdown', Dropdown);
 app.component('InputNumber', InputNumber);
 app.component('Calendar', Calendar);
+app.component('Toast', Toast);
 
 app.mount('#app')
