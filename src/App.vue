@@ -30,7 +30,8 @@
                     id="username1"
                     type="text"
                     v-model="v$.value1.$model"
-                    :class="{ 'p-invalid': v$.value1.$invalid}"/>
+                    :class="{ 'p-invalid': v$.value1.$invalid }"
+                  />
                   <label for="username1"> Nome </label>
                 </span>
               </div>
@@ -40,7 +41,8 @@
                   <InputMask
                     id="telefone"
                     mask="(99) 99999-9999"
-                    v-model="val1"
+                    v-model="v$.tel.$model"
+                    :class="{ 'p-invalid': v$.tel.$invalid }"
                   />
                   <label for="telefone">Telefone</label>
                 </span>
@@ -48,14 +50,20 @@
               <!--classe nome animal-->
               <div class="col-6 mt-4">
                 <span class="p-float-label">
-                  <InputText id="username2" type="text" v-model="value2" />
+                  <InputText
+                    id="username2"
+                    type="text"
+                    v-model="v$.value2.$model"
+                    :class="{ 'p-invalid': v$.value2.$invalid }"
+                  />
                   <label for="username2">Nome do Animal</label>
                 </span>
               </div>
               <!--classe gênero do animal-->
               <div class="mt-4 col-3">
                 <Dropdown
-                  v-model="selectCategoria"
+                  v-model="v$.selectGenero.$model"
+                  :class="{ 'p-invalid': v$.selectGenero.$invalid }"
                   :options="animal"
                   optionLabel="nomeAnimal"
                   placeholder="Gênero do Animal"
@@ -64,13 +72,24 @@
               <!--class sexo-->
               <div class="col-6">
                 <h5>Sexo do Animal</h5>
-                <div class="field-checkbox">
-                  <Checkbox id="binary1" v-model="checked1" :binary="true" />
-                  <label for="binary1">Macho</label>
+                <div class="field-radiobutton">
+                  <RadioButton
+                    id="sexo1"
+                    name="city"
+                    value="macho"
+                    v-model="v$.sexo.$model"
+                    :class="{ 'p-invalid': v$.sexo.$invalid }"
+                  />
+                  <label for="sexo1">Macho</label>
                 </div>
-                <div class="field-checkbox">
-                  <Checkbox id="binary2" v-model="checked2" :binary="true" />
-                  <label for="binary2">Fêmea</label>
+                <div class="field-radiobutton">
+                  <RadioButton
+                    id="sexo2"
+                    name="city"
+                    value="femea"
+                    v-model="v$.sexo.$model"
+                  />
+                  <label for="sexo2">Fêmea</label>
                 </div>
               </div>
               <!--Class data de nascimento -->
@@ -86,10 +105,52 @@
               </div>
             </div>
             <Toast />
+            <!-- <div class="col-2 mr-2">
+              <Button
+                @click.prevent="submit"
+                label="Salvar"
+                class="p-button-raised"
+              />
+            </div> -->
             <div class="col-2 mr-2">
-              <Button @click.prevent="submit" label="Salvar" class="p-button-raised" />
+              <Button
+                label="Salvar"
+                icon="pi pi-external-link"
+                @click="openConfirmation"
+              />
+              <Dialog
+                header="Confirme seus Dados"
+                v-model:visible="displayConfirmation"
+                :style="{ width: '350px' }"
+                :modal="true"
+              >
+                <div class="confirmation-content">
+                  <i
+                    class="pi pi-exclamation-triangle mr-3"
+                    style="font-size: 2rem"
+                  />
+                  <span>Seus dados estão corretos?</span>
+                </div>
+                <template #footer>
+                  <Button
+                    label="No"
+                    icon="pi pi-times"
+                    @click="closeConfirmation"
+                    class="p-button-text"
+                  />
+                  <Button
+                    label="Yes"
+                    icon="pi pi-check"
+                    @click="closeConfirmation"
+                    class="p-button-text"
+                    autofocus
+                    @click.prevent="submit"
+                  />
+                </template>
+              </Dialog>
             </div>
           </div>
+
           <!--Final da grid-->
         </panel>
       </template>
@@ -113,19 +174,24 @@ export default {
     return {
       value1: null,
       value2: null,
-      val1: null,
-      checked1: false,
-      checked2: false,
-      selectCategoria: null,
+      tel: null,
+      sexo: null,
+      selectGenero: null,
       animal: [{ nomeAnimal: "Canino" }, { nomeAnimal: "Felino" }],
       date1: null,
+      displayConfirmation: false,
     };
   },
   validations() {
     return {
       value1: { required }, // Matches this.firstName
+      tel: { required },
+      value2: { required },
+      selectGenero: { required },
+      sexo: { required },
     };
   },
+
   methods: {
     submit() {
       this.v$.$touch();
@@ -133,18 +199,25 @@ export default {
         console.log("submit!");
         this.$toast.add({
           severity: "error",
-          summary: "Error Message",
-          detail: "Erro ao enviar",
+          summary: "Não foi possível salvar",
+          detail: "Preencha os campos obrigatórios",
           life: 3000,
         });
       } else {
         this.$toast.add({
           severity: "success",
-          summary: "Success Message",
-          detail: "Order submitted",
+          summary: "Cadastro salvo com sucesso",
+          detail: "Seja bem vindo!",
           life: 3000,
         });
       }
+    },
+
+    openConfirmation() {
+      this.displayConfirmation = true;
+    },
+    closeConfirmation() {
+      this.displayConfirmation = false;
     },
   },
 };

@@ -10,6 +10,7 @@ import '/node_modules/primeflex/primeflex.css'
 
 import Dialog from 'primevue/dialog';
 import Button from 'primevue/button';
+import RadioButton from 'primevue/radiobutton';
 import Card from 'primevue/card';
 import Panel from 'primevue/panel'
 import InputText from 'primevue/inputtext';
@@ -33,6 +34,7 @@ app.use(ToastService);
 
 app.component('Dialog', Dialog);
 app.component('Button', Button);
+app.component('RadioButton', RadioButton);
 app.component('Card', Card);
 app.component('Panel', Panel);
 app.component('InputText' , InputText);
