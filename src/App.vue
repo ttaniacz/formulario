@@ -13,15 +13,15 @@
             m-2
             flex
             align-items-center
-            justify-content-center
-          "
-        >
-          Cadastro do Animal
+            justify-content-center"
+            >Cadastro do Animal
         </div>
-        <br />
+        <br>
         <!--Inicio da grid-->
-        <panel>
-          <div class="p-fluid grid formgrid">
+        <panel >
+          
+          <br>
+          <div  class="p-fluid grid formgrid ">
             <div class="grid">
               <!--class nome pessoa-->
               <div class="col-6">
